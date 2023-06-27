@@ -38,6 +38,15 @@ nav {
   margin-left: 7px;
 }
 
+.card-container {
+  color: white;
+  border-style: solid;
+  border-color: grey;
+  width: 50%;
+  margin: auto;
+  margin-top: 15px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
