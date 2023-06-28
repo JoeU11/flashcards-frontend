@@ -5,6 +5,7 @@ import Card from "./components/card.js"
 import CardNew from "./components/cardNew.js"
 import axios from "axios";
 import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [cards, setCards] = useState([])
@@ -28,8 +29,12 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <CardNew />
-      {cardElements}
+      <Router>
+        <Routes>
+          <Route path="/cards/new" element={<CardNew />} />
+          <Route path="/" element={cardElements} />
+        </Routes>
+      </Router>
     </div>
   );
 }
