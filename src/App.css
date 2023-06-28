@@ -47,6 +47,10 @@ nav {
   margin-top: 15px;
 }
 
+.card-new {
+  color: white
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Navbar from "./components/navbar.js"
 import Card from "./components/card.js"
+import CardNew from "./components/cardNew.js"
 import axios from "axios";
 import { useState, useEffect } from 'react'
 
@@ -27,6 +28,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
+      <CardNew />
       {cardElements}
     </div>
   );
