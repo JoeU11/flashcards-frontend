@@ -6,6 +6,7 @@ export default function Main(props) {
   const [card, setCard] = useState(null)
   const [reveal, setReveal] = useState(false)
   const [cardIndex, setCardIndex] = useState(0)
+  const [length, setLength] = useState(0)
 
   function shuffleCards(cards) {
     // console.log("shuffling")
@@ -23,6 +24,7 @@ export default function Main(props) {
     setCardIndex(0)
     props.setCards(cards)
     setCard(cards[0])
+    setLength(cards.length)
   }
 
   function startGame(cards) {
@@ -31,7 +33,6 @@ export default function Main(props) {
   }
 
   const nextCard = (cards) => {
-    // breaks when cardIndex = cards.length
     setCardIndex(cardIndex + 1)
     setReveal(false)
     setCard(cards[cardIndex + 1])
@@ -40,11 +41,13 @@ export default function Main(props) {
   return (
     <div id="main">
       {props.play || <button onClick={() => startGame(props.cards)}>Start</button>}
-      <div onClick={() => setReveal(true)}>
-        {props.play && <Card {...{ card, reveal }} />}
-      </div>
-      {props.play && <button onClick={() => shuffleCards(props.cards)}>Shuffle</button>}
-      {props.play && <button onClick={() => nextCard(props.cards)}>Next</button>}
+      {props.play && <div>
+        <div onClick={() => setReveal(true)}>
+          <Card {...{ card, reveal }} />
+        </div>
+        <button onClick={() => shuffleCards(props.cards)}>Shuffle</button>
+        {(cardIndex < length - 1) && <button onClick={() => nextCard(props.cards)}>Next</button>}
+      </div>}
     </div>
   )
 }
