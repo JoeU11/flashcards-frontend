@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import Card from "./card.js"
-import { toBeRequired } from '@testing-library/jest-dom/dist/matchers';
 
 export default function Main(props) {
   console.log("hello from maim")
   const [card, setCard] = useState(null)
+  const [reveal, setReveal] = useState(false)
 
   function shuffleCards(cards) {
     console.log("shuffling")
@@ -18,7 +18,7 @@ export default function Main(props) {
       [cards[currentIndex], cards[randomIndex]] = [
         cards[randomIndex], cards[currentIndex]];
     }
-
+    setReveal(false)
     props.setCards(cards)
     setCard(cards[0])
   }
@@ -32,7 +32,9 @@ export default function Main(props) {
   return (
     <div id="main">
       {props.play || <button onClick={() => startGame(props.cards)}>Start</button>}
-      {props.play && <Card {...card} />}
+      <div onClick={() => setReveal(true)}>
+        {props.play && <Card {...{ card, reveal }} />}
+      </div>
       {props.play && <button onClick={() => shuffleCards(props.cards)}>Shuffle</button>}
     </div>
   )

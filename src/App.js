@@ -22,7 +22,7 @@ function App() {
 
   const cardElements = cards.map((card) => {
     return (
-      <Card key={card.id} {...card} />
+      <Card key={card.id} {...{ card, reveal: true }} />
     )
   })
 
@@ -34,7 +34,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/cards/new" element={<CardNew />} />
-          <Route path="/" element={<Main {...{ cards, play, setPlay, setCards }} />} /> {/* Replace with home/start page */}
+          <Route path="/" element={<Main {...{ cards, play, setPlay, setCards }} />} />
           <Route path="/cards" element={cardElements} />
         </Routes>
       </Router>
