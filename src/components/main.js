@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react'
 import Card from "./card.js"
 
 export default function Main(props) {
-  console.log("hello from maim")
+  // console.log("hello from maim")
   const [card, setCard] = useState(null)
   const [reveal, setReveal] = useState(false)
+  const [cardIndex, setCardIndex] = useState(0)
 
   function shuffleCards(cards) {
-    console.log("shuffling")
+    // console.log("shuffling")
     let currentIndex = cards.length, randomIndex;
 
     while (currentIndex != 0) {
@@ -19,6 +20,7 @@ export default function Main(props) {
         cards[randomIndex], cards[currentIndex]];
     }
     setReveal(false)
+    setCardIndex(0)
     props.setCards(cards)
     setCard(cards[0])
   }
@@ -26,7 +28,13 @@ export default function Main(props) {
   function startGame(cards) {
     props.setPlay(true)
     shuffleCards(cards)
+  }
 
+  const nextCard = (cards) => {
+    // breaks when cardIndex = cards.length
+    setCardIndex(cardIndex + 1)
+    setReveal(false)
+    setCard(cards[cardIndex + 1])
   }
 
   return (
@@ -36,6 +44,7 @@ export default function Main(props) {
         {props.play && <Card {...{ card, reveal }} />}
       </div>
       {props.play && <button onClick={() => shuffleCards(props.cards)}>Shuffle</button>}
+      {props.play && <button onClick={() => nextCard(props.cards)}>Next</button>}
     </div>
   )
 }
