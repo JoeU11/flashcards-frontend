@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import Card from "./card.js"
+import Modal from "./modal.js"
+import EditCard from "./editCard.js"
 
 export default function Main(props) {
   // console.log("hello from maim")
@@ -7,6 +9,7 @@ export default function Main(props) {
   const [reveal, setReveal] = useState(false)
   const [cardIndex, setCardIndex] = useState(0)
   const [length, setLength] = useState(0)
+  const [showEdit, setShowEdit] = useState(false)
 
   function shuffleCards(cards) {
     // console.log("shuffling")
@@ -38,12 +41,23 @@ export default function Main(props) {
     setCard(cards[cardIndex + 1])
   }
 
+  function handleClose() {
+    setShowEdit(false)
+  }
+
+  function edit() {
+    setShowEdit(true)
+  }
+
   return (
     <div id="main">
       {props.play || <button onClick={() => startGame(props.cards)}>Start</button>}
+      <Modal show={showEdit} onClose={handleClose}>
+        <EditCard {...{ card, setCard, handleClose }} />
+      </Modal>
       {props.play && <div>
         <div onClick={() => setReveal(true)}>
-          <Card {...{ card, reveal }} />
+          <Card {...{ card, reveal, edit }} />
         </div>
         <button onClick={() => shuffleCards(props.cards)}>Shuffle</button>
         {(cardIndex < length - 1) && <button onClick={() => nextCard(props.cards)}>Next</button>}
