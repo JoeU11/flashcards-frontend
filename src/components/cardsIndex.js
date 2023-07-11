@@ -6,9 +6,11 @@ import { useState } from "react"
 export default function CardsIndex(props) {
   const [showEdit, setShowEdit] = useState(false)
   const [currentCard, setCurrentCard] = useState(props.cards[0])
+  const [cardIndex, setCardIndex] = useState(0)
 
   const handleEdit = (card) => {
     setCurrentCard(card)
+    setCardIndex(props.cards.findIndex(obj => obj.id === card.id))
     setShowEdit(true)
   }
 
@@ -27,9 +29,10 @@ export default function CardsIndex(props) {
   return (
     <div className="card-index">
       <Modal show={showEdit} onClose={handleClose}>
-        <EditCard {...{ handleClose }} card={currentCard} cards={props.cards} setCards={props.setCards} setCard={setCurrentCard} />
+        <EditCard {...{ cardIndex, handleClose }} card={currentCard} cards={props.cards} setCards={props.setCards} setCard={setCurrentCard} />
       </Modal>
       {cardElements}
+      <button onClick={() => console.log(props.cards)}>print cards</button>
     </div>
   )
 }

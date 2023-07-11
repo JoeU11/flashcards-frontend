@@ -8,7 +8,7 @@ export default function CardEdit(props) {
     let params = new FormData(event.target)
     axios.patch(`http://localhost:3000/cards/${props.card.id}`, params).then(response => {
       console.log(response)
-      props.setCard || props.setCard(response.data)
+      props.setCard(response.data)
       event.target.reset()
       props.handleClose()
       var updatedCards = props.cards
