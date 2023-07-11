@@ -53,7 +53,7 @@ export default function Main(props) {
     <div id="main">
       {props.play || <button onClick={() => startGame(props.cards)}>Start</button>}
       <Modal show={showEdit} onClose={handleClose}>
-        <EditCard {...{ card, setCard, handleClose }} />
+        <EditCard {...{ card, setCard, handleClose, cardIndex }} cards={props.cards} setCards={props.setCards} />
       </Modal>
       {props.play && <div>
         <div onClick={() => setReveal(true)}>

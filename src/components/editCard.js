@@ -11,6 +11,9 @@ export default function CardEdit(props) {
       props.setCard(response.data)
       event.target.reset()
       props.handleClose()
+      var updatedCards = props.cards
+      updatedCards[props.cardIndex] = response.data
+      props.setCards(updatedCards)
     })
   }
   return (
@@ -23,7 +26,7 @@ export default function CardEdit(props) {
           Description: <input name="description" defaultValue={props.card.description} />
         </div>
         <button type="submit" style={{ color: "white", backgroundColor: "green" }}>Edit card</button>
-        <button onClick={console.log(props.card)}>print card</button>
+        <button onClick={console.log(props.cards, props.cardIndex, props.card)}>print card</button>
       </form>
     </div >
   )
