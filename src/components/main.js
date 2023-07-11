@@ -4,7 +4,6 @@ import Modal from "./modal.js"
 import EditCard from "./editCard.js"
 
 export default function Main(props) {
-  // console.log("hello from maim")
   const [card, setCard] = useState(null)
   const [reveal, setReveal] = useState(false)
   const [cardIndex, setCardIndex] = useState(0)
@@ -45,7 +44,7 @@ export default function Main(props) {
     setShowEdit(false)
   }
 
-  function edit() {
+  function handleEdit() {
     setShowEdit(true)
   }
 
@@ -57,7 +56,7 @@ export default function Main(props) {
       </Modal>
       {props.play && <div>
         <div onClick={() => setReveal(true)}>
-          <Card {...{ card, reveal, edit }} />
+          <Card {...{ card, reveal, handleEdit }} />
         </div>
         <button onClick={() => shuffleCards(props.cards)}>Shuffle</button>
         {(cardIndex < length - 1) && <button onClick={() => nextCard(props.cards)}>Next</button>}
