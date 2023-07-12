@@ -2,6 +2,7 @@ import { upload } from '@testing-library/user-event/dist/upload'
 import axios from 'axios'
 
 export default function CardEdit(props) {
+
   function handleSubmit(event) {
     console.log("patching card")
     event.preventDefault()
@@ -19,13 +20,13 @@ export default function CardEdit(props) {
   }
 
   function deleteCard() {
-    console.log(props.card.id)
     axios.delete(`http://localhost:3000/cards/${props.card.id}`).then(response => {
       console.log(response)
-      props.handleClose()
       var updatedCards = props.cards
       updatedCards.splice(props.cardIndex, 1)
       props.setCards(updatedCards)
+      props.setCard(updatedCards[props.cardIndex])
+      props.handleClose()
     })
   }
 

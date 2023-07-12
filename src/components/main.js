@@ -40,8 +40,9 @@ export default function Main(props) {
     setCard(cards[cardIndex + 1])
   }
 
-  function handleClose() {
+  function handleClose(cards) {
     setShowEdit(false)
+    setLength(props.cards.length)
   }
 
   function handleEdit() {
@@ -61,6 +62,7 @@ export default function Main(props) {
         <button onClick={() => shuffleCards(props.cards)}>Shuffle</button>
         {(cardIndex < length - 1) && <button onClick={() => nextCard(props.cards)}>Next</button>}
       </div>}
+      {/* <button onClick={() => console.log(props.cards)}>print cards</button> */}
     </div>
   )
 }
